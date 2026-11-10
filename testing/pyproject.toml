@@ -1,0 +1,8 @@
+[tool.pyttest.ini_options]
+addopts = "-rA -s"
+markers = [
+  "fast: marks quick unit tests",
+  "slow: marks tests that take a long time to run",
+  "api: marks tests that hit the API",
+  "smoke: marks tests that are quick to run and check, basic functionality"
+]
