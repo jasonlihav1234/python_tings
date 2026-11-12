@@ -3,7 +3,10 @@ import requests
 
 logger = logging.getLogger(__name__)
 
-def check_urls(urls: list[str], timeout: int = 5) -> dict[str, str]:
+
+def check_urls(
+    urls: list[str], timeout: int = 5
+) -> dict[str, str]:
     """
     Checks a list of URLs and returns their status.
 
@@ -15,7 +18,9 @@ def check_urls(urls: list[str], timeout: int = 5) -> dict[str, str]:
         A dictionary mapping each URL to its status string/
     """
 
-    logger.info(f"Stating check for {len(urls)} URLs with a timeout of {timeout}")
+    logger.info(
+        f"Stating check for {len(urls)} URLs with a timeout of {timeout}"
+    )
     results = {}
 
     for url in urls:
@@ -28,7 +33,9 @@ def check_urls(urls: list[str], timeout: int = 5) -> dict[str, str]:
             if response.ok:
                 status = f"{response.status_code} OK"
             else:
-                status = f"{response.status_code} {response.reason}"
+                status = (
+                    f"{response.status_code} {response.reason}"
+                )
 
         except requests.exceptions.Timeout:
             status = "TIMEOUT"
@@ -38,10 +45,7 @@ def check_urls(urls: list[str], timeout: int = 5) -> dict[str, str]:
             logger.warning(f"Connection error for {url}.")
         except requests.exceptions.RequestException as e:
             status = f"REQUEST ERROR: {type(e).__name__}"
-            logger.error(
-                status,
-                exc_info=True
-            )
+            logger.error(status, exc_info=True)
 
         results[url] = status
         logger.debug(f"Checked: {url:<40} -> {status}")

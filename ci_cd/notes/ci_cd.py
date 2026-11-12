@@ -43,5 +43,3 @@ CI/CD Workflow
 7. Publish the project to both TestPyPi and PyPi when a new tag is pushed
 
 """
-
-
